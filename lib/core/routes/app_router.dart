@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/core/shared/models/products_response_models/product_model.dart';
 import 'package:shop_app/features/addresses/view_models/addresses_cubit/addresses_cubit.dart';
 import 'package:shop_app/features/login/view_models/login_cubit/login_cubit.dart';
 import 'package:shop_app/features/product_details/views/product_details_view.dart';
@@ -66,10 +65,7 @@ class AppRouter {
         );
       case Routes.productDetails:
         return MaterialPageRoute(builder: (_) {
-          if (arguments is ProductModel) {
-            return ProductDetailsView(product: arguments);
-          }
-          return const NoRouteDefinedScreen();
+            return const ProductDetailsView();
         });
 
       case Routes.search:

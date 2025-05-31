@@ -21,7 +21,6 @@ class ListTileProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => context.pushPersistentScreen(ProductDetailsView(
-        product: product,
         isSearchedProducts: isSearchView,
       )),
       child: ListTile(

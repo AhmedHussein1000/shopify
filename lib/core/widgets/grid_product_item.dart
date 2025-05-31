@@ -15,8 +15,8 @@ class GridProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>  context.pushPersistentScreen(ProductDetailsView(
-        product: product,) ),
+      onTap: () =>  context.pushPersistentScreen(const ProductDetailsView(
+        ) ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(

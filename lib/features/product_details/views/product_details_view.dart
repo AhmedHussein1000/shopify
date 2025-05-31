@@ -9,21 +9,21 @@ import '../../../core/themes/app_styles.dart';
 import 'widgets/product_details_view_body_bloc_builder.dart';
 
 class ProductDetailsView extends StatelessWidget {
-  const ProductDetailsView({super.key,required this.productId, this.isSearchedProducts=false});
-  final int productId;
+  const ProductDetailsView({super.key, this.productId, this.isSearchedProducts=false});
+  final int? productId;
   final bool isSearchedProducts;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CartButton(
-        productId: productId,
+        productId: productId!,
       ),
       appBar: AppBar(
         title: const Text('Shopify'),
       ),
       body: BlocProvider(
-        create: (context) => ProductDetailsCubit(getIt())..getProductDetails(productId: productId),
+        create: (context) => ProductDetailsCubit(getIt())..getProductDetails(productId: productId!),
         child: ProductDetailsViewBodyBlocBuilder( isSearchedProducts: isSearchedProducts),
       ),
     );
