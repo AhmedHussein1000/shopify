@@ -1,35 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/shared/models/products_response_models/product_model.dart';
+import 'package:shop_app/core/helpers/dummy_data.dart';
 import '../../../../core/widgets/custom_text_message.dart';
 import '../../view_models/product_details_cubit/product_details_cubit.dart';
 import 'product_details_view_body.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class ProductDetailsViewBodyBlocBuilder extends StatefulWidget {
+class ProductDetailsViewBodyBlocBuilder extends StatelessWidget {
   const ProductDetailsViewBodyBlocBuilder({
     super.key,
-    required this.product,
     required this.isSearchedProducts,
   });
 
-  final ProductModel? product;
   final bool? isSearchedProducts;
-
-  @override
-  State<ProductDetailsViewBodyBlocBuilder> createState() =>
-      _ProductDetailsViewBodyBlocBuilderState();
-}
-
-class _ProductDetailsViewBodyBlocBuilderState
-    extends State<ProductDetailsViewBodyBlocBuilder> {
-  @override
-  void initState() {
-    context
-        .read<ProductDetailsCubit>()
-        .getProductDetails(productId: widget.product!.id);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +22,14 @@ class _ProductDetailsViewBodyBlocBuilderState
           return CustomTextMessage(text: state.message);
         } else if (state is ProductDetailsSuccess) {
           return ProductDetailsViewBody(
-              product: widget.product,
-              isSearchedProducts: widget.isSearchedProducts);
+              product: state.product,
+              isSearchedProducts: isSearchedProducts);
         } else {
           return Skeletonizer(
             enabled: true,
             child: ProductDetailsViewBody(
-                product: widget.product,
-                isSearchedProducts: widget.isSearchedProducts),
+                product: dummyProduct,
+                isSearchedProducts: isSearchedProducts),
           );
         }
       },

@@ -6,27 +6,25 @@ import '../../cart/view_models/carts_cubit/carts_cubit.dart';
 import '../view_models/product_details_cubit/product_details_cubit.dart';
 import '../../../core/helpers/size_config.dart';
 import '../../../core/themes/app_styles.dart';
-import '../../../core/shared/models/products_response_models/product_model.dart';
 import 'widgets/product_details_view_body_bloc_builder.dart';
 
 class ProductDetailsView extends StatelessWidget {
-  const ProductDetailsView({super.key,required this.product, this.isSearchedProducts=false});
-  final ProductModel product;
+  const ProductDetailsView({super.key,required this.productId, this.isSearchedProducts=false});
+  final int productId;
   final bool isSearchedProducts;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CartButton(
-        productId: product.id,
+        productId: productId,
       ),
       appBar: AppBar(
         title: const Text('Shopify'),
       ),
       body: BlocProvider(
-        create: (context) => ProductDetailsCubit(getIt()),
-        child: ProductDetailsViewBodyBlocBuilder(
-            product: product, isSearchedProducts: isSearchedProducts),
+        create: (context) => ProductDetailsCubit(getIt())..getProductDetails(productId: productId),
+        child: ProductDetailsViewBodyBlocBuilder( isSearchedProducts: isSearchedProducts),
       ),
     );
   }
